@@ -12,14 +12,6 @@ const Container = styled.div`
     padding: 2rem;
 `;
 
-const Title = styled.h1`
-    font-size: 5.4rem;
-    color: #56a5eb;
-    margin-bottom: 5rem;
-`;
-
-
 export {
     Container,
-    Title,
 }
