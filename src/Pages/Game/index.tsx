@@ -1,4 +1,5 @@
 import React from "react";
+import HeadsUpComponent from "../../Components/HeadsUp";
 import OptionBoxComponent from "../../Components/OptionBox";
 import { 
     Container, 
@@ -8,7 +9,8 @@ import {
 const GamePage: React.FC = () => {
     return(
         <Container>
-            <SubTitle>ana</SubTitle>
+            <HeadsUpComponent/>
+            <SubTitle>Question</SubTitle>
             <OptionBoxComponent/>
         </Container>
     )
