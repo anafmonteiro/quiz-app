@@ -5,12 +5,21 @@ import {
     ChoiceText
 } from "./styles";
 
-const OptionBoxComponent:React.FC = () => {
+interface OptionBoxComponentProps {
+    answers:string[]
+}
+
+const OptionBoxComponent:React.FC<OptionBoxComponentProps> = (props:OptionBoxComponentProps) => {
+    const { answers } = props
     return (
-            <ChoiceContainer>
-                <ChoicePrefix>A</ChoicePrefix>
-                <ChoiceText>Texto</ChoiceText>
-            </ChoiceContainer>
+        <>
+            { answers.map((answer,i)=>(
+                <ChoiceContainer>
+                    <ChoicePrefix key={i}>{++i}</ChoicePrefix>
+                    <ChoiceText key={i}>{answer}</ChoiceText>
+                </ChoiceContainer>
+            ))}
+        </>
     )
 }
 
