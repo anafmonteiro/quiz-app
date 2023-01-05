@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { Button, Container, Title } from "./styles";
+import ButtonComponent from "../../Components/Button";
+import { Container, Title } from "./styles";
 
 const HomePage:React.FC = () => {
 
@@ -11,12 +12,14 @@ const HomePage:React.FC = () => {
             <Title>
                 Quick Quiz!
             </Title>
-            <Button onClick={()=>navigate("/game")}>
-                Play
-            </Button>
-            <Button>
-                High Score
-            </Button>
+            <ButtonComponent
+                buttonText="Play"
+                onClick={()=>navigate("/game")}
+            />
+            <ButtonComponent
+                buttonText="High Score"
+            />
+                
         </Container>
     )
 }

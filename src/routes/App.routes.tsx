@@ -1,7 +1,8 @@
 import React from "react";
 import { BrowserRouter, Navigate, Route, Routes} from "react-router-dom";
-import GamePage from "../Pages/Game";
 import HomePage from "../Pages/Home";
+import GamePage from "../Pages/Game";
+import EndPage from "../Pages/End";
 
 
 const AppRoutes: React.FC = () => (
@@ -9,6 +10,7 @@ const AppRoutes: React.FC = () => (
             <Routes>
                 <Route path="" element={<HomePage/>} />
                 <Route path="/game" element={<GamePage/>} />
+                <Route path="/end" element={<EndPage/>} />
             </Routes>
         </BrowserRouter>
       
