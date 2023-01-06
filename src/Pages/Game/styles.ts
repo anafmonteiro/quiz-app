@@ -12,6 +12,9 @@ const Container = styled.div`
     padding: 2rem;
 `;
 
+const QuestionContainer = styled.div`
+`;
+
 const SubTitle = styled.h2`
     font-size: 4.2rem;
     font-weight: 700;
@@ -22,5 +25,6 @@ const SubTitle = styled.h2`
 
 export {
     Container,
+    QuestionContainer,
     SubTitle,
 }

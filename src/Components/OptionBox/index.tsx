@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { 
     ChoiceContainer, 
     ChoicePrefix,
@@ -6,20 +6,32 @@ import {
 } from "./styles";
 
 interface OptionBoxComponentProps {
-    answers:string[]
+    answer:string
+    prefix:number
+    correctAnswer: string 
+    onClick: () => void;
 }
 
 const OptionBoxComponent:React.FC<OptionBoxComponentProps> = (props:OptionBoxComponentProps) => {
-    const { answers } = props
+    
+    const { answer, prefix, correctAnswer} = props
+
+    const [answerStyle, setAnswerStyle] = useState<string>("")
+
+    const verifyAnswer = (user_answer:string) => {
+        if(user_answer === correctAnswer) setAnswerStyle("correct")
+        else setAnswerStyle("incorrect")
+        setTimeout(()=>{
+            props.onClick()
+            setAnswerStyle("")
+        }, 1000)
+    }
+
     return (
-        <>
-            { answers.map((answer,i)=>(
-                <ChoiceContainer>
-                    <ChoicePrefix key={i}>{++i}</ChoicePrefix>
-                    <ChoiceText key={i}>{answer}</ChoiceText>
-                </ChoiceContainer>
-            ))}
-        </>
+        <ChoiceContainer onClick={()=>verifyAnswer(answer)}>
+            <ChoicePrefix>{prefix}</ChoicePrefix>
+            <ChoiceText color={answerStyle}>{answer}</ChoiceText>
+        </ChoiceContainer>
     )
 }
 

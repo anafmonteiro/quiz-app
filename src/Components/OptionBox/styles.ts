@@ -25,6 +25,7 @@ const ChoicePrefix = styled.p`
 const ChoiceText = styled.p`
     padding: 1.5rem;
     width: 100%;
+    background-color: ${props => props.color === "correct"? "green" : props.color === "incorrect"? "red" : "white"};
 `;
 
 export {
