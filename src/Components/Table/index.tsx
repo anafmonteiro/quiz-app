@@ -1,4 +1,5 @@
 import React from "react";
+import { sortHighScores } from "../../Utils/functions";
 
 import { 
     Container, 
@@ -7,7 +8,9 @@ import {
 } from "./styles";
 
 const TableComponent: React.FC = () => {
-    const highScores = JSON.parse(localStorage.getItem("highScores") || "")
+
+    const highScores = sortHighScores(JSON.parse(localStorage.getItem("highScores") || ""))
+    
     return(
         <Container>
             <ScoreContainer>
