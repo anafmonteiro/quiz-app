@@ -9,7 +9,8 @@ interface OptionBoxComponentProps {
     answer:string
     prefix:number
     correctAnswer: string 
-    onClick: () => void;
+    score:number
+    onClick: (answerScore:number) => void;
 }
 
 const OptionBoxComponent:React.FC<OptionBoxComponentProps> = (props:OptionBoxComponentProps) => {
@@ -19,10 +20,21 @@ const OptionBoxComponent:React.FC<OptionBoxComponentProps> = (props:OptionBoxCom
     const [answerStyle, setAnswerStyle] = useState<string>("")
 
     const verifyAnswer = (user_answer:string) => {
-        if(user_answer === correctAnswer) setAnswerStyle("correct")
-        else setAnswerStyle("incorrect")
+        
+        if(user_answer === correctAnswer) {
+            let lastScore = JSON.parse(localStorage.getItem("score") || "")
+            setAnswerStyle("correct")
+            localStorage.setItem("score", JSON.stringify(lastScore+=10))
+        }else {
+            setAnswerStyle("incorrect")
+        }
+        userScore()
+    }
+
+    const userScore = () => {
+        const score = JSON.parse(localStorage.getItem("score")||"")
         setTimeout(()=>{
-            props.onClick()
+            props.onClick(score)
             setAnswerStyle("")
         }, 1000)
     }
