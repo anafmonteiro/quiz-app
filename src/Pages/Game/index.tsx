@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { getQuestions } from "../../Api";
 import HeadsUpComponent from "../../Components/HeadsUp";
+import LoaderComponent from "../../Components/Loader";
 import OptionBoxComponent from "../../Components/OptionBox";
 import { 
     Container, 
@@ -19,19 +20,27 @@ const GamePage: React.FC = () => {
 
     const [maxQuestions, setMaxQuestions] = useState<number>(0)
 
+    const [loader, setLoader] = useState<boolean>(false)
+
     const getAllQuestions = async () => {
-        localStorage.setItem("score", JSON.stringify(0))
-        const response:any = await getQuestions()
-        setAllQuestions(response) 
-        setMaxQuestions(response.length)
-        response.map((question: any) => (
-            setQuestions({
-                question: question.question, 
-                correct_answer: question.correct_answer, 
-                answers: [...question.incorrect_answers, question.correct_answer],
-                score:0
-            })
-        ))
+        setLoader(true)
+        try{
+            localStorage.setItem("score", JSON.stringify(0))
+            const response:any = await getQuestions()
+            setAllQuestions(response) 
+            setMaxQuestions(response.length)
+            response.map((question: any) => (
+                setQuestions({
+                    question: question.question, 
+                    correct_answer: question.correct_answer, 
+                    answers: [...question.incorrect_answers, question.correct_answer],
+                    score:0
+                })
+            ))
+        }catch(e){
+            console.log(e)
+        }
+        setLoader(false)
     }
 
     const getTheRestOfQuestions = async (answerScore:number) => {
@@ -65,17 +74,23 @@ const GamePage: React.FC = () => {
                 score={question.score}
             />
             <QuestionContainer>
-                <SubTitle>{question.question}</SubTitle>
-                {question.answers.map((answer, index) => (
-                    <OptionBoxComponent
-                        onClick={getTheRestOfQuestions}
-                        key={index}
-                        prefix={++index}
-                        answer={answer}
-                        correctAnswer={question.correct_answer}
-                        score={question.score}
-                    />
-                ))}
+                {loader? 
+                    <LoaderComponent/>
+                    :
+                    <>
+                        <SubTitle>{question.question}</SubTitle>
+                        {question.answers.map((answer, index) => (
+                            <OptionBoxComponent
+                                onClick={getTheRestOfQuestions}
+                                key={index}
+                                prefix={++index}
+                                answer={answer}
+                                correctAnswer={question.correct_answer}
+                                score={question.score}
+                            />
+                        ))}
+                    </>
+                }
             </QuestionContainer>
         </Container>
     )
