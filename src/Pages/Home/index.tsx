@@ -18,6 +18,7 @@ const HomePage:React.FC = () => {
             />
             <ButtonComponent
                 buttonText="High Score"
+                onClick={()=>navigate("/highScore")}
             />
                 
         </Container>
