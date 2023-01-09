@@ -7,6 +7,7 @@ interface InputComponentProps {
         id?:string,
         placeholder:string
     }
+    onChange: (name:string) => void;
 }
 
 const InputComponent: React.FC<InputComponentProps> = (props:InputComponentProps) => {
@@ -18,6 +19,7 @@ const InputComponent: React.FC<InputComponentProps> = (props:InputComponentProps
                 name="username" 
                 id="username" 
                 placeholder={userInformation.placeholder}
+                onChange={(e)=>props.onChange(e.target.value)}
             />
         </Container>
     )
