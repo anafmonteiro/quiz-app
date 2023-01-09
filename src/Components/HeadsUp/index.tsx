@@ -8,18 +8,28 @@ import {
     ItenSecondaryText,
 } from "./styles";
 
-const HeadsUpComponent:React.FC = () => {
+interface HeadsUpComponentProps {
+    questions:[],
+    max_questions:number
+    score:number
+}
+
+const HeadsUpComponent:React.FC<HeadsUpComponentProps> = (props:HeadsUpComponentProps) => {
+    
+    const size = ((props.max_questions - props.questions.length))/props.max_questions
+    const currentQuestion = props.max_questions - props.questions.length
+    
     return(
         <Container>
             <Itens>
-                <ItenSecondaryText>Question</ItenSecondaryText>
+                <ItenSecondaryText>Question {currentQuestion}/{props.max_questions}</ItenSecondaryText>
                 <ProgressBar>
-                    <ProgressBarFull/>
+                    <ProgressBarFull style={{width: `${size *100}%`}}/>
                 </ProgressBar>
             </Itens>
             <Itens>
                 <ItenSecondaryText>Score</ItenSecondaryText>
-                <ItenPrincipalText>0</ItenPrincipalText>
+                <ItenPrincipalText>{props.score}</ItenPrincipalText>
             </Itens>
         </Container>
     )

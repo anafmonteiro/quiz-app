@@ -29,7 +29,7 @@ const ProgressBar = styled.div`
 const ProgressBarFull = styled.div`
     height: 3.4rem;
     background-color: #56a5eb;
-    width: 0%;
+    // width: ${props => props.style?.width? props.style?.width : 0};
 `;
 
 export {
